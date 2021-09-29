@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 const Signin = lazy(() => import('./auth/signin'));
 const SignUp = lazy(() => import('./auth/signup'));
 const Profile = lazy(() => import('./profile'));
+const Dashboard = lazy(() => import('./dashboard'));
 
 export function Routes() {
 	return (
@@ -12,6 +13,7 @@ export function Routes() {
 				<Switch>
 					<Route exact path={'/'} component={Signin} />
 					<Route exact path={'/signup'} component={SignUp} />
+					<Route exact path={'/dashboard'} component={Dashboard} />
 					<Route exact path={'/profile'} component={Profile} />
 				</Switch>
 			</Suspense>

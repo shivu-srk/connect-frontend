@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Input from '../input';
+import { IHeader } from './types';
 import * as Styles from './styles';
 import Logo from '../../assets/logo.png';
 import Search from '../../assets/search.png';
 
-function Header() {
+function Header(props: IHeader) {
+	const history = useHistory();
+	const { username, isHome } = props;
 	const [search, setSearch] = useState('');
 
 	const searchHandler = (e: any) => {
@@ -12,7 +16,7 @@ function Header() {
 	};
 
 	return (
-		<Styles.Wrapper>
+		<Styles.Wrapper isHome={isHome}>
 			<Styles.Icon
 				src={Logo}
 				width={'40px'}
@@ -31,14 +35,15 @@ function Header() {
 			<Styles.Spacer />
 			<Styles.ComponentsWrapper
 				width={'300px'}
-				justifyContent={'space-around'}>
+				justifyContent={'space-around'}
+				onClick={() => history.push('/dashboard')}>
 				<Styles.IconWrapper height={'100%'}>
 					<Styles.Icon
 						src={
 							'https://img.icons8.com/ios-filled/50/4a90e2/home.png'
 						}
 					/>
-					<Styles.ActiveLink />
+					{isHome && <Styles.ActiveLink />}
 				</Styles.IconWrapper>
 				<Styles.Icon
 					src={
@@ -52,7 +57,11 @@ function Header() {
 				/>
 			</Styles.ComponentsWrapper>
 			<Styles.Spacer />
-			<Styles.ComponentsWrapper height={'40px'} cursor={'true'}>
+			<Styles.ComponentsWrapper
+				height={'40px'}
+				cursor={'true'}
+				isSelected={!isHome}
+				onClick={() => history.push('/profile')}>
 				<Styles.IconWrapper
 					borderRadius={'50%'}
 					width={'25px'}
@@ -66,7 +75,7 @@ function Header() {
 						height={'15px'}
 					/>
 				</Styles.IconWrapper>
-				<Styles.Text>Shivani</Styles.Text>
+				<Styles.Text>{username}</Styles.Text>
 			</Styles.ComponentsWrapper>
 			<Styles.ComponentsWrapper
 				width={'100px'}

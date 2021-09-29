@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{
+	isHome?: boolean;
+}>`
 	display: flex;
 	align-items: center;
 	width: 100%;
 	height: 56px;
 	padding: 0 15px;
-	position: absolute;
+	position: ${(p) => (p.isHome ? 'sticky' : 'absolute')};
 	background: #fff;
 	top: 0;
 `;
@@ -50,7 +52,7 @@ export const ComponentsWrapper = styled.div<{
 	width?: string;
 	justifyContent?: string;
 	styles?: string;
-	selected?: boolean;
+	isSelected?: boolean;
 	cursor?: string;
 }>`
 	display: flex;
@@ -60,7 +62,7 @@ export const ComponentsWrapper = styled.div<{
 	${(p) => p.justifyContent && `justify-content: ${p.justifyContent};`}
     ${(p) => p.styles}
     ${(p) =>
-		p.selected &&
+		p.isSelected &&
 		`
         border-radius: 25px; 
         border: 1px solid #7d4c09; 
