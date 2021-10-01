@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import Button from '../../library/button';
 import Input from '../../library/input';
 import LandingPage from '../../library/landingPage';
+import { signupAPI } from '../../services';
+import { signupValidation } from '../validate';
 import * as Styles from '../styles';
 
 function Signup() {
 	const history = useHistory();
+	const [cookies, setCookie] = useCookies(['__connect__user__email__']);
 	const [name, setName] = useState('');
 	const [emailId, setEmailId] = useState('');
 	const [password, setPassword] = useState('');
+
+	const getMaxExpireDate = () => {
+		var d = new Date();
+		d.setTime(d.getTime() + 999 * 24 * 60 * 60 * 1000);
+		return d;
+	};
 
 	const nameHandler = (e: any) => {
 		setName(e.target.value);
@@ -20,7 +30,18 @@ function Signup() {
 	const passwordHandler = (e: any) => {
 		setPassword(e.target.value);
 	};
-	const signupHandler = () => {};
+	const signupHandler = async () => {
+		if (signupValidation(name, emailId, password)) {
+			const response = await signupAPI(name, emailId, password);
+			if (response) {
+				setCookie('__connect__user__email__', emailId, {
+					path: '/',
+					expires: getMaxExpireDate(),
+				});
+				history.push('/dashboard');
+			}
+		}
+	};
 
 	return (
 		<Styles.Wrapper>
