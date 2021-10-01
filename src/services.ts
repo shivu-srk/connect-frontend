@@ -1,11 +1,9 @@
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
 
-const getMaxExpireDate = () => {
-	var d = new Date();
-	d.setTime(d.getTime() + 999 * 24 * 60 * 60 * 1000);
-	return d;
-};
+const url =
+	process.env.NODE_ENV === 'production'
+		? 'https://connect-friends-web.herokuapp.com/'
+		: 'http://localhost:8000/';
 
 export const signupAPI = async (
 	name: string,
@@ -15,7 +13,7 @@ export const signupAPI = async (
 	try {
 		const response = await axios({
 			method: 'POST',
-			url: 'http://localhost:8000/auth/signup',
+			url: url + 'auth/signup',
 			data: {
 				name,
 				emailId,
@@ -40,7 +38,7 @@ export const signinAPI = async (emailId: string, password: string) => {
 	try {
 		const response = await axios({
 			method: 'POST',
-			url: 'http://localhost:8000/auth/signin',
+			url: url + 'auth/signin',
 			data: {
 				emailId,
 				password,
@@ -62,12 +60,9 @@ export const signinAPI = async (emailId: string, password: string) => {
 
 export const postDetailsAPI = async (emailId: string) => {
 	try {
-		const response = await axios.post(
-			'http://localhost:8000/post/details',
-			{
-				emailId,
-			},
-		);
+		const response = await axios.post(url + 'post/details', {
+			emailId,
+		});
 		return response;
 	} catch (e) {
 		return false;

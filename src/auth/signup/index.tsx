@@ -10,7 +10,7 @@ import * as Styles from '../styles';
 
 function Signup() {
 	const history = useHistory();
-	const [cookies, setCookie] = useCookies(['__connect__user__email__']);
+	const setCookie = useCookies(['__connect__user__email__'])[1];
 	const [name, setName] = useState('');
 	const [emailId, setEmailId] = useState('');
 	const [password, setPassword] = useState('');

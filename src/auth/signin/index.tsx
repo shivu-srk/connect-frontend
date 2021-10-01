@@ -10,7 +10,8 @@ import { useCookies } from 'react-cookie';
 
 function Signin() {
 	const history = useHistory();
-	const [cookie, setCookie] = useCookies(['__connect__user__email__']);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const setCookie = useCookies(['__connect__user__email__'])[1];
 	const [emailId, setEmailId] = useState('');
 	const [password, setPassword] = useState('');
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import Header from '../library/header';
@@ -9,7 +10,7 @@ import { postDetailsAPI } from '../services';
 import * as Styles from './styles';
 
 function Dashboard() {
-	const [cookie, setCookie] = useCookies(['__connect__user__email__']);
+	const [cookie] = useCookies(['__connect__user__email__']);
 	const [name, setName] = useState('');
 	const [postDetails, setPostDetails] = useState(null);
 
@@ -25,6 +26,7 @@ function Dashboard() {
 
 	useEffect(() => {
 		getDetails();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
 		<Styles.Wrapper>

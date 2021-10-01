@@ -13,7 +13,7 @@ const Profile = lazy(() => import('./profile'));
 const Dashboard = lazy(() => import('./dashboard'));
 
 export function Routes() {
-	const [cookie, setCookie] = useCookies(['__connect__user__email__']);
+	const cookie = useCookies(['__connect__user__email__'])[0];
 	return (
 		<Router>
 			<Suspense fallback={<h5>Loading...</h5>}>
