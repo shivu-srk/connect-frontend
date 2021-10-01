@@ -31,7 +31,11 @@ export function Routes() {
 						<Redirect to={'/'} />
 					)}
 					{cookie.__connect__user__email__ ? (
-						<Route exact path={'/profile'} component={Profile} />
+						<Route
+							exact
+							path={'/profile/:name'}
+							component={Profile}
+						/>
 					) : (
 						<Redirect to={'/'} />
 					)}

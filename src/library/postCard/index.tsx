@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { IPostDetails } from './types';
 import * as Styles from './styles';
 
-function PostCard() {
+function PostCard(props: IPostDetails) {
+	const { postedBy, photoUrl } = props;
+	const [liked, setLiked] = useState(false);
+
+	const likeHandler = () => setLiked(!liked);
 	return (
 		<Styles.Wrapper>
 			<Styles.Header>
 				<Styles.Photo
 					src={'https://img.icons8.com/dusk/64/000000/guest-male.png'}
 				/>
-				<Styles.Name>Shivani</Styles.Name>
+				<Styles.Name>{postedBy}</Styles.Name>
 				<Styles.Spacer />
 				<Styles.Icon
 					src={
@@ -16,17 +21,21 @@ function PostCard() {
 					}
 				/>
 			</Styles.Header>
-			<Styles.Image
-				src={
-					'https://thumbs.dreamstime.com/b/spring-landscape-blooming-sakura-cherry-tree-single-falling-pink-flower-petals-hills-covered-fresh-green-grass-142256962.jpg'
-				}
-			/>
-			<Styles.Footer>
-				<Styles.Icon
-					src={
-						'https://img.icons8.com/emoji/48/000000/heart-suit.png'
-					}
-				/>
+			<Styles.Image src={photoUrl} />
+			<Styles.Footer onClick={likeHandler}>
+				{liked ? (
+					<Styles.Icon
+						src={
+							'https://img.icons8.com/ios-glyphs/48/fa314a/like--v1.png'
+						}
+					/>
+				) : (
+					<Styles.Icon
+						src={
+							'https://img.icons8.com/material-outlined/30/000000/like.png'
+						}
+					/>
+				)}
 			</Styles.Footer>
 		</Styles.Wrapper>
 	);

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import Header from '../library/header';
@@ -12,7 +11,13 @@ import * as Styles from './styles';
 function Dashboard() {
 	const [cookie] = useCookies(['__connect__user__email__']);
 	const [name, setName] = useState('');
-	const [postDetails, setPostDetails] = useState(null);
+	const [postDetails, setPostDetails] = useState<
+		{
+			id: string;
+			name: string;
+			photoUrl: string;
+		}[]
+	>([]);
 
 	const getDetails = async () => {
 		const emailId = cookie.__connect__user__email__;
@@ -30,14 +35,18 @@ function Dashboard() {
 	}, []);
 	return (
 		<Styles.Wrapper>
-			<Header username={'Shivani'} isHome />
+			<Header username={name} isHome />
 			<Styles.ComponentsWrapper>
-				<MenuList />
+				<MenuList name={name} />
 				<Styles.CenterWrapper>
 					<NewPost />
-					<PostCard />
-					<PostCard />
-					<PostCard />
+					{postDetails.map((post) => (
+						<PostCard
+							key={post.id}
+							postedBy={post.name}
+							photoUrl={post.photoUrl}
+						/>
+					))}
 				</Styles.CenterWrapper>
 				<SuggestionList />
 			</Styles.ComponentsWrapper>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import Input from '../input';
 import { IHeader } from './types';
 import * as Styles from './styles';
@@ -8,6 +9,7 @@ import Search from '../../assets/search.png';
 
 function Header(props: IHeader) {
 	const history = useHistory();
+	const removeCookie = useCookies(['__connect__user__email__'])[2];
 	const { username, isHome } = props;
 	const [search, setSearch] = useState('');
 
@@ -58,10 +60,12 @@ function Header(props: IHeader) {
 			</Styles.ComponentsWrapper>
 			<Styles.Spacer />
 			<Styles.ComponentsWrapper
+				width={'100px'}
 				height={'40px'}
 				cursor={'true'}
+				justifyContent={'flex-end'}
 				isSelected={!isHome}
-				onClick={() => history.push('/profile')}>
+				onClick={() => history.push(`/profile/${username}`)}>
 				<Styles.IconWrapper
 					borderRadius={'50%'}
 					width={'25px'}
@@ -111,7 +115,8 @@ function Header(props: IHeader) {
 					borderRadius={'50%'}
 					width={'25px'}
 					height={'25px'}
-					styles={'justify-content: center; border: 1px solid;'}>
+					styles={'justify-content: center; border: 1px solid;'}
+					onClick={() => removeCookie('__connect__user__email__')}>
 					<Styles.Icon
 						src={'https://img.icons8.com/dusk/64/000000/exit.png'}
 						width={'15px'}
