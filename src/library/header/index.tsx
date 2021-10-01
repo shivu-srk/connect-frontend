@@ -17,6 +17,11 @@ function Header(props: IHeader) {
 		setSearch(e.target.value);
 	};
 
+	const logoutHandler = () => {
+		removeCookie('__connect__user__email__');
+		history.push('/');
+	};
+
 	return (
 		<Styles.Wrapper isHome={isHome}>
 			<Styles.Icon
@@ -116,7 +121,7 @@ function Header(props: IHeader) {
 					width={'25px'}
 					height={'25px'}
 					styles={'justify-content: center; border: 1px solid;'}
-					onClick={() => removeCookie('__connect__user__email__')}>
+					onClick={logoutHandler}>
 					<Styles.Icon
 						src={'https://img.icons8.com/dusk/64/000000/exit.png'}
 						width={'15px'}
