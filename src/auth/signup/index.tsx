@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import Button from '../../library/button';
@@ -14,6 +14,11 @@ function Signup() {
 	const [name, setName] = useState('');
 	const [emailId, setEmailId] = useState('');
 	const [password, setPassword] = useState('');
+
+	const validated = useMemo(
+		() => signupValidation(name, emailId, password),
+		[name, emailId, password],
+	);
 
 	const getMaxExpireDate = () => {
 		var d = new Date();
@@ -40,6 +45,8 @@ function Signup() {
 				});
 				history.push('/dashboard');
 			}
+		} else {
+			console.log('Incorrect Format');
 		}
 	};
 
@@ -84,6 +91,7 @@ function Signup() {
 						borderRadius={'5px'}
 						color={'#fff'}
 						margin={'20px 0'}
+						disabled={!validated}
 					/>
 					<Styles.Text>
 						Already Registered?{' '}

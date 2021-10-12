@@ -18,6 +18,7 @@ function Button(props: IButtonDetails) {
 		iconHeight,
 		iconWidth,
 		iconStyles,
+		disabled,
 	} = props;
 
 	return (
@@ -27,6 +28,7 @@ function Button(props: IButtonDetails) {
 			margin={margin}
 			bg={bg}
 			borderRadius={borderRadius}
+			isDisabled={disabled}
 			styles={styles}>
 			{icon && (
 				<Styles.Icon

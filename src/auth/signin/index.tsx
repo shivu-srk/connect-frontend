@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../../library/button';
 import Input from '../../library/input';
@@ -14,6 +14,11 @@ function Signin() {
 	const setCookie = useCookies(['__connect__user__email__'])[1];
 	const [emailId, setEmailId] = useState('');
 	const [password, setPassword] = useState('');
+
+	const validated = useMemo(
+		() => signinValidation(emailId, password),
+		[emailId, password],
+	);
 
 	const getMaxExpireDate = () => {
 		var d = new Date();
@@ -38,7 +43,7 @@ function Signin() {
 				history.push('/dashboard');
 			}
 		} else {
-			console.log('hi');
+			console.log('Incorrect Format');
 		}
 	};
 
@@ -76,6 +81,7 @@ function Signin() {
 						borderRadius={'5px'}
 						color={'#fff'}
 						margin={'20px 0'}
+						disabled={!validated}
 					/>
 					<Styles.Text>
 						Not Registered?{' '}
