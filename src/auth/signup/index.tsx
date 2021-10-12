@@ -5,7 +5,11 @@ import Button from '../../library/button';
 import Input from '../../library/input';
 import LandingPage from '../../library/landingPage';
 import { signupAPI } from '../../services';
-import { signupValidation } from '../validate';
+import {
+	signupValidation,
+	emailValidation,
+	passwordValidation,
+} from '../validate';
 import * as Styles from '../styles';
 
 function Signup() {
@@ -65,6 +69,8 @@ function Signup() {
 						onChangeHandler={nameHandler}
 						width={'100%'}
 						margin={'10px 0'}
+						errorText={'Enter Your Name'}
+						validation={(name) => !!name.trim()}
 					/>
 					<Input
 						value={emailId}
@@ -73,6 +79,8 @@ function Signup() {
 						type={'email'}
 						width={'100%'}
 						margin={'15px 0'}
+						errorText={'Invalid Email Id'}
+						validation={emailValidation}
 					/>
 					<Input
 						value={password}
@@ -81,6 +89,8 @@ function Signup() {
 						type={'password'}
 						width={'100%'}
 						margin={'15px 0'}
+						errorText={'Invalid Password Format'}
+						validation={passwordValidation}
 					/>
 					<Button
 						name={'SIGN UP'}

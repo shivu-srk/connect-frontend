@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IInputDetails } from './types';
 import * as Styles from './styles';
 
@@ -15,31 +15,49 @@ function Input(props: IInputDetails) {
 		iconWidth,
 		iconHeight,
 		iconStyles,
+		errorText,
 		styles,
 		onChangeHandler,
+		validation,
 	} = props;
+
+	const [error, setError] = useState('');
+
+	const blurHandler = () => {
+		if (!(validation?.(value) ?? true)) {
+			setError(errorText ?? 'validation error');
+		}
+	};
+
+	const changeHandler = (e: any) => {
+		onChangeHandler(e);
+		setError('');
+	};
 
 	return (
 		<Styles.Wrapper
-			width={width}
 			margin={margin}
-			height={height}
-			borderRadius={borderRadius}
-			styles={styles}>
-			{icon && (
-				<Styles.Icon
-					src={icon}
-					width={iconWidth}
-					height={iconHeight}
-					styles={iconStyles}
+			styles={styles}
+			width={width}
+			height={height}>
+			<Styles.InputWrapper borderRadius={borderRadius}>
+				{icon && (
+					<Styles.Icon
+						src={icon}
+						width={iconWidth}
+						height={iconHeight}
+						styles={iconStyles}
+					/>
+				)}
+				<Styles.Input
+					value={value}
+					onChange={changeHandler}
+					type={type || 'string'}
+					placeholder={placeHolder}
+					onBlur={blurHandler}
 				/>
-			)}
-			<Styles.Input
-				value={value}
-				onChange={onChangeHandler}
-				type={type || 'string'}
-				placeholder={placeHolder}
-			/>
+			</Styles.InputWrapper>
+			{error && <Styles.ErrorText>{errorText}</Styles.ErrorText>}
 		</Styles.Wrapper>
 	);
 }

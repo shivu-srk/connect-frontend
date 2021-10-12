@@ -12,5 +12,7 @@ export interface IInputDetails {
 	iconWidth?: string;
 	iconStyles?: string;
 	styles?: string;
+	errorText?: string;
 	onChangeHandler: (e: any) => void;
+	validation?: (value: string) => boolean;
 }

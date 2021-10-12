@@ -4,7 +4,11 @@ import Button from '../../library/button';
 import Input from '../../library/input';
 import LandingPage from '../../library/landingPage';
 import { signinAPI } from '../../services';
-import { signinValidation } from '../validate';
+import {
+	emailValidation,
+	signinValidation,
+	passwordValidation,
+} from '../validate';
 import * as Styles from '../styles';
 import { useCookies } from 'react-cookie';
 
@@ -29,6 +33,7 @@ function Signin() {
 	const emailIdHandler = (e: any) => {
 		setEmailId(e.target.value);
 	};
+
 	const passwordHandler = (e: any) => {
 		setPassword(e.target.value);
 	};
@@ -63,6 +68,8 @@ function Signin() {
 						type={'email'}
 						width={'100%'}
 						margin={'10px 0'}
+						errorText={'Invalid Email Id'}
+						validation={emailValidation}
 					/>
 					<Input
 						value={password}
@@ -71,6 +78,8 @@ function Signin() {
 						type={'password'}
 						width={'100%'}
 						margin={'15px 0'}
+						errorText={'Invalid Password Format'}
+						validation={passwordValidation}
 					/>
 					<Button
 						name={'SIGN IN'}
