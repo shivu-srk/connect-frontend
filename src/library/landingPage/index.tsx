@@ -6,7 +6,7 @@ function LandingPage() {
 	return (
 		<Styles.Wrapper>
 			<Styles.Title>Connect</Styles.Title>
-			<Styles.SubHeading>World's Largest Friend Finder</Styles.SubHeading>
+			<Styles.SubHeading>Social Media for Influencers</Styles.SubHeading>
 			<Styles.Image src={SocialNetwork} alt={'social network'} />
 		</Styles.Wrapper>
 	);
