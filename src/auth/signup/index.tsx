@@ -12,10 +12,7 @@ import {
 	signupValidation,
 	emailValidation,
 	passwordValidation,
-
 } from '../validate';
-import { setOriginalNode } from 'typescript';
-
 
 function Signup() {
 	const history = useHistory();
@@ -25,10 +22,9 @@ function Signup() {
 	const [password, setPassword] = useState('');
 	const [role, setRole] = useState('');
 
-
 	const validated = useMemo(
 		() => signupValidation(name, emailId, password, role),
-		[name, emailId, password,role],
+		[name, emailId, password, role],
 	);
 
 	const getMaxExpireDate = () => {
@@ -46,16 +42,10 @@ function Signup() {
 	const passwordHandler = (e: any) => {
 		setPassword(e.target.value);
 	};
-	const roleHandler = (e:any) => {
-		setRole(e.target.role);
-		console.log(e.target.value);
-	};
-	 
 
-	
 	const signupHandler = async () => {
-		if (signupValidation(name, emailId, password,role)) {
-			const response = await signupAPI(name, emailId, password,role);
+		if (signupValidation(name, emailId, password, role)) {
+			const response = await signupAPI(name, emailId, password, role);
 			if (response) {
 				setCookie('__connect__user__email__', emailId, {
 					path: '/',
@@ -106,12 +96,22 @@ function Signup() {
 						errorText={'Invalid Password Format'}
 						validation={passwordValidation}
 					/>
-					<div onClick={roleHandler}>
-        <input type="radio" value="influencer" name="role" />Influencer
-        <input type="radio" value="user" name="role" /> User
-		
-      </div>
-				
+					<div>
+						<input
+							type='radio'
+							value='influencer'
+							name='role'
+							onChange={() => setRole('influencer')}
+						/>
+						Influencer
+						<input
+							type='radio'
+							value='user'
+							name='role'
+							onChange={() => setRole('user')}
+						/>
+						User
+					</div>
 					<Button
 						name={'SIGN UP'}
 						onClickHandler={signupHandler}
