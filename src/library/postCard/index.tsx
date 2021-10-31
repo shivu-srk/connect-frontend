@@ -16,6 +16,8 @@ function PostCard(props: IPostDetails) {
 				<Styles.Name>{postedBy}</Styles.Name>
 				<Styles.Spacer />
 				<Styles.Icon
+					width={'20px'}
+					height={'20px'}
 					src={
 						'https://img.icons8.com/material-outlined/48/000000/menu-2.png'
 					}

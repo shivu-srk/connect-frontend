@@ -36,9 +36,12 @@ export const Name = styled.div`
 	margin-left: 10px;
 `;
 
-export const Icon = styled.img`
-	width: 30px;
-	height: 30px;
+export const Icon = styled.img<{
+	height?: string;
+	width?: string;
+}>`
+	width: ${(p) => p.width || '30px'};
+	height: ${(p) => p.height || '30px'};
 	cursor: pointer;
 `;
 
