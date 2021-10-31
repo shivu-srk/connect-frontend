@@ -5,6 +5,7 @@ import * as Styles from './styles';
 
 function Profile() {
 	const { name } = useParams<{ name: string }>();
+	
 	return (
 		<Styles.Wrapper>
 			<Header username={name} />

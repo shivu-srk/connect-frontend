@@ -12,13 +12,14 @@ export const signupValidation = (
 	name: string,
 	emailId: string,
 	password: string,
+	role:string,
 ) => {
 	return (
 		!!emailId &&
 		emailValidation(emailId) &&
 		!!password &&
 		passwordValidation(password) &&
-		!!name
+		!!name 
 	);
 };
 

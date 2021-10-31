@@ -1,16 +1,21 @@
 import React, { useMemo, useState } from 'react';
+
 import { useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import Button from '../../library/button';
 import Input from '../../library/input';
 import LandingPage from '../../library/landingPage';
 import { signupAPI } from '../../services';
+import * as Styles from '../styles';
+
 import {
 	signupValidation,
 	emailValidation,
 	passwordValidation,
+
 } from '../validate';
-import * as Styles from '../styles';
+import { setOriginalNode } from 'typescript';
+
 
 function Signup() {
 	const history = useHistory();
@@ -18,10 +23,12 @@ function Signup() {
 	const [name, setName] = useState('');
 	const [emailId, setEmailId] = useState('');
 	const [password, setPassword] = useState('');
+	const [role, setRole] = useState('');
+
 
 	const validated = useMemo(
-		() => signupValidation(name, emailId, password),
-		[name, emailId, password],
+		() => signupValidation(name, emailId, password, role),
+		[name, emailId, password,role],
 	);
 
 	const getMaxExpireDate = () => {
@@ -39,9 +46,16 @@ function Signup() {
 	const passwordHandler = (e: any) => {
 		setPassword(e.target.value);
 	};
+	const roleHandler = (e:any) => {
+		setRole(e.target.role);
+		console.log(e.target.value);
+	};
+	 
+
+	
 	const signupHandler = async () => {
-		if (signupValidation(name, emailId, password)) {
-			const response = await signupAPI(name, emailId, password);
+		if (signupValidation(name, emailId, password,role)) {
+			const response = await signupAPI(name, emailId, password,role);
 			if (response) {
 				setCookie('__connect__user__email__', emailId, {
 					path: '/',
@@ -92,6 +106,12 @@ function Signup() {
 						errorText={'Invalid Password Format'}
 						validation={passwordValidation}
 					/>
+					<div onClick={roleHandler}>
+        <input type="radio" value="influencer" name="role" />Influencer
+        <input type="radio" value="user" name="role" /> User
+		
+      </div>
+				
 					<Button
 						name={'SIGN UP'}
 						onClickHandler={signupHandler}

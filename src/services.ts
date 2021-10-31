@@ -9,6 +9,7 @@ export const signupAPI = async (
 	name: string,
 	emailId: string,
 	password: string,
+	role: string,
 ) => {
 	try {
 		const response = await axios({
@@ -18,6 +19,7 @@ export const signupAPI = async (
 				name,
 				emailId,
 				password,
+				role,
 			},
 			headers: {
 				'Access-Control-Allow-Origin': '*',
