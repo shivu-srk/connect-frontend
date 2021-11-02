@@ -70,3 +70,14 @@ export const postDetailsAPI = async (emailId: string) => {
 		return false;
 	}
 };
+
+export const profileDetailsAPI = async (emailId: string) => {
+	try {
+		const response = await axios.post(url + 'profile/details', {
+			emailId,
+		});
+		return response.data;
+	} catch (e) {
+		return { status: false, error: 'Something Went Wrong...' };
+	}
+};

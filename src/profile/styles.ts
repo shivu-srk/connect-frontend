@@ -32,6 +32,14 @@ export const Name = styled.div`
 	font-weight: bold;
 	line-height: 26px;
 	margin-top: 3%;
+	text-transform: uppercase;
+`;
+
+export const Role = styled.div`
+	font-size: 20px;
+	font-weight: normal;
+	margin-top: 8px;
+	text-transform: uppercase;
 `;
 
 export const Bio = styled.div`
